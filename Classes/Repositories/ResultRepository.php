@@ -36,18 +36,23 @@ mysqli_close($db);*/
 
     public function getAll($table)
     {
-        $query = 'SELECT * FROM '.$table.' order by university_id';
+        $query = 'SELECT * FROM '.$table;
         $connect = new Connector();
         $result = $connect->useQuery($query);
-        return $this->echoAll($result);
+        return $this->getColumn($result);
     }
 
-    public function echoAll($result)
+    public function getColumn($result)
     {
-        while ($row = mysqli_fetch_row($result)) {
-            printf("%s %s %s %s\n",
-                $row[0], $row[1], $row[2],  $row[3]);
-            echo "<br>";
-        }
+        $res= mysqli_fetch_array($result);
+        $results = [
+            1 => $res['university_id'],
+            2 => $res['university_name'],
+            3 => $res['university_city'],
+            4 => $res['university_site']
+        ];
+        return $results;
     }
+
+
 }

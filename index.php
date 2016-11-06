@@ -10,5 +10,4 @@ require_once 'vendor/autoload.php';
 
 $connect = new \Vendor\Dir\Repositories\Connector();
 $obj1 = new \Vendor\Dir\Repositories\ResultRepository();
-$obj1->getAll('University');
 require_once "main.html";

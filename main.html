@@ -14,18 +14,30 @@
     }
 </style>
 <table border="1px solid black">
-    <caption align="bottom">University</caption>
+    <caption>University</caption>
     <tr>
         <th>id</th>
         <th>name</th>
         <th>city</th>
         <th>site</th>
+
+
+
+        <?php
+        $obj2 = new \Vendor\Dir\Repositories\Connector();
+        $result = $obj2->useQuery('SELECT * FROM University');
+        while ($row = mysqli_fetch_row($result))
+        {
+            echo "<tr>";
+            foreach($row as $element){
+                echo "<td>".$element."</td>";
+            }
+            echo "</tr>";
+            }
+        ?>
+
     </tr>
 
-        <td><?php echo $obj1->getAll('University'); ?></td>
-        <td><?php echo $obj1->getAll('University'); ?></td>
-        <td><?php echo $obj1->getAll('University'); ?></td>
-        <td><?php echo $obj1->getAll('University'); ?></td>
 
 
 </table>
