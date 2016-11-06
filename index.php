@@ -9,5 +9,6 @@
 require_once 'vendor/autoload.php';
 
 $connect = new \Vendor\Dir\Repositories\Connector();
-$obj1 = new \Vendor\Dir\Repositories\ResultRepository();
+$obj3 = new \Vendor\Dir\Repositories\ResultRepository();
+
 require_once "main.html";

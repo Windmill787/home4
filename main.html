@@ -24,8 +24,8 @@
 
 
         <?php
-        $obj2 = new \Vendor\Dir\Repositories\Connector();
-        $result = $obj2->useQuery('SELECT * FROM University');
+        $result = $obj3->getAll('University');
+
         while ($row = mysqli_fetch_row($result))
         {
             echo "<tr>";
