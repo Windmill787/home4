@@ -10,20 +10,31 @@ namespace Vendor\Dir\Repositories;
 
 class ResultRepository
 {
-    public function getAll()
+    public function getAll($table)
     {
-        $query = 'SELECT * FROM University';
+        $query = 'SELECT * FROM '.$table;
+        $connect = new Connector();
+        $column = $connect->useQuery($query);
+        $un_id   = $column['university_id'];
+        $un_name = $column['university_name'];
+        $un_city = $column['university_city'];
+        $un_site = $column['university_site'];
+        $results = $un_id.$un_name.$un_city.$un_site;
+        return $results;
+    }
 
-        $data = mysqli_query(Connector::connectDatabase(),$query);
+    public function getColumn($table)
+    {
+        $query = 'SELECT * FROM '.$table;
+        $connect = new Connector();
+        $column = $connect->useQuery($query);
+        $results = [
+            'un_id'   => $column['university_id'],
+            'un_name' => $column['university_name'],
+            'un_city' => $column['university_city'],
+            'un_site' => $column['university_site']
+        ];
 
-        $result = mysqli_fetch_array($data);
-
-        /*$results[] = [
-            'id' => $results['university_id'],
-            'name' => $results['university_name'],
-            'city' => $results['university_city'],
-            'site' => $results['university_site']
-        ];*/
-        return $result;
+        return $results;
     }
 }

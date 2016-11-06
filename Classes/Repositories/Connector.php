@@ -9,11 +9,18 @@
 
 namespace Vendor\Dir\Repositories;
 
-class Connector
+class Connector extends ConnectorParams
 {
-    static public function connectDatabase()
+    public function connectDatabase()
     {
-        $link = mysqli_connect("localhost", "vieweruser", "12345", "home4");
+        $link = mysqli_connect($this->dbhost, $this->dbuser, $this->dbpassword, $this->dbname);
         return $link;
+    }
+
+    public function useQuery($query)
+    {
+        $data = mysqli_query($this->connectDatabase(), $query);
+        $result = mysqli_fetch_array($data);
+        return $result;
     }
 }
