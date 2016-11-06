@@ -19,8 +19,7 @@ class Connector extends ConnectorParams
 
     public function useQuery($query)
     {
-        $data = mysqli_query($this->connectDatabase(), $query);
-        $result = mysqli_fetch_array($data);
+        $result = mysqli_query($this->connectDatabase(), $query);
         return $result;
     }
 }

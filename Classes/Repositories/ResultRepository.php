@@ -10,31 +10,44 @@ namespace Vendor\Dir\Repositories;
 
 class ResultRepository
 {
+/*$db = mysqli_connect('mysql_host', 'mysql_user', 'mysql_password', 'mydatabase')
+or die('Error: ' . mysql_error());
+$sql = 'SELECT * FROM students';
+$result = mysqli_query($db, $sql);
+// or
+$stmt = mysqli_prepare($db, $sql);
+
+
+$query = "INSERT INTO myCity (Name, CountryCode, District) VALUES (?,?,?)";
+$stmt = mysqli_prepare($db, $query);
+$val1 = 'Stuttgart';
+$val2 = 'DEU';
+$val3 = 'Baden-Wuerttemberg';
+
+
+mysqli_stmt_bind_param($stmt, "sss", $val1, $val2, $val3);
+
+$res = mysqli_stmt_execute($stmt);
+while ($row = mysqli_fetch_row($result)) {
+printf("%s (%s,%s)\n", $row[0], $row[1], $row[2]);
+}
+mysqli_free_result($result);
+mysqli_close($db);*/
+
     public function getAll($table)
     {
-        $query = 'SELECT * FROM '.$table;
+        $query = 'SELECT * FROM '.$table.' order by university_id';
         $connect = new Connector();
-        $column = $connect->useQuery($query);
-        $un_id   = $column['university_id'];
-        $un_name = $column['university_name'];
-        $un_city = $column['university_city'];
-        $un_site = $column['university_site'];
-        $results = $un_id.$un_name.$un_city.$un_site;
-        return $results;
+        $result = $connect->useQuery($query);
+        return $this->echoAll($result);
     }
 
-    public function getColumn($table)
+    public function echoAll($result)
     {
-        $query = 'SELECT * FROM '.$table;
-        $connect = new Connector();
-        $column = $connect->useQuery($query);
-        $results = [
-            'un_id'   => $column['university_id'],
-            'un_name' => $column['university_name'],
-            'un_city' => $column['university_city'],
-            'un_site' => $column['university_site']
-        ];
-
-        return $results;
+        while ($row = mysqli_fetch_row($result)) {
+            printf("%s %s %s %s\n",
+                $row[0], $row[1], $row[2],  $row[3]);
+            echo "<br>";
+        }
     }
 }
