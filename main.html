@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
     <title>Homework№4</title>
 </head>
 <body>
@@ -20,11 +19,10 @@
         <th>name</th>
         <th>city</th>
         <th>site</th>
-
-
-
         <?php
-        $result = $obj3->getAll('University');
+        echo "<td colspan='2' align='center'>"."<a href='index.php'>Create new</a>"."</td>";
+
+        $result = $obj3->getAll('Student');
 
         while ($row = mysqli_fetch_row($result))
         {
@@ -32,14 +30,12 @@
             foreach($row as $element){
                 echo "<td>".$element."</td>";
             }
+            echo "<td>"."<a href='index.php'>Edit</a>"."</td>";
+            echo "<td>"."<a href='index.php'>Delete</a>"."</td>";
             echo "</tr>";
             }
         ?>
-
     </tr>
-
-
-
 </table>
 </body>
 </html>
