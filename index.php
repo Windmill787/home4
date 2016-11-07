@@ -2,19 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: max
- * Date: 05.11.16
- * Time: 21:04
+ * Date: 07.11.16
+ * Time: 13:57
  */
-
-require_once 'vendor/autoload.php';
-
-$connect = new \Vendor\Dir\Repositories\Connector();
-$obj3 = new \Vendor\Dir\Repositories\ResultRepository();
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-$obj1 = new \Vendor\Dir\Components\Router();
-$obj1->run();
+define('ROOT', dirname(__FILE__));
+require_once (ROOT.'/components/Router.php');
+include_once (ROOT.'/connector/Connector.php');
 
-require_once "main.html";
+$obj1 = new Router();
+$obj1->run();
