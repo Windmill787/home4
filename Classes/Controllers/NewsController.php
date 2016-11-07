@@ -17,4 +17,13 @@ class NewsController
         return true;
 
     }
+
+    public function actionView($params)
+    {
+        echo $params[0];
+        echo $params[1];
+        echo $params[2];
+        return true;
+
+    }
 }

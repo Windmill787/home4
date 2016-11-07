@@ -19,7 +19,7 @@ class Router
         $this->routes = include($routesPath);
     }
 
-    private function getURL()
+    public function getURL()
     {
         if (!empty($_SERVER['REQUEST_URI'])){
             return trim($_SERVER['REQUEST_URI'], '/');
@@ -32,23 +32,34 @@ class Router
         foreach ($this->routes as $uriPattern => $path)
         {
             if (preg_match("~$uriPattern~", $uri)){
-                $segments = explode('/', $path);
+
+                $internalRoute = preg_replace("~$uriPattern~", $path, $uri);
+
+                $segments = explode('/', $internalRoute);
                 $controllerName = array_shift($segments).'Controller';
                 $controllerName = ucfirst($controllerName);
 
-                $actionName = 'action'.array_shift($segments);
-                $actionName = ucfirst($actionName);
-                
+                $actionName = 'action'.ucfirst(array_shift($segments));
+
+                echo $controllerName."<br>";
+                echo $actionName."<br>";
+
+                $parameters = $segments;
+                echo "<pre>";
+                print_r($parameters);
+                echo "</pre>";
+
+
                 $controllerFile = 'Classes/Controllers/'.$controllerName.'.php';
 
                 if (file_exists($controllerFile)) {
                     echo 'true';
-                    include_once($controllerFile);
+                    include($controllerFile);
                 }
 
                 $controllerObject = new $controllerName;
                 $result = $controllerObject->$actionName();
-                if ($result != NULL){
+                if ($result != null){
                     break;
                 }
             }
