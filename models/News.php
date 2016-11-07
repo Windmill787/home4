@@ -17,12 +17,12 @@ class News
 
            $db = Connector::getConnection();
 
-            $result = $db->query('SELECT student_id, 
+            $result = $db->query('SELECT  
                     student_name, 
                     student_sirname, 
                     student_email, 
                     student_telnumber 
-                    FROM Student WHERE student_id='.$id);
+            FROM Student WHERE student_id='.$id);
 
             $result ->setFetchMode(PDO::FETCH_ASSOC);
 
@@ -55,4 +55,17 @@ class News
 
     }
 
+    public static function changeItem()
+    {
+
+        $db = Connector::getConnection();
+
+        $result1 = $result = $db->query("UPDATE Students 
+                    SET student_name = $name, 
+                    student_sirname = $sirname, 
+                    student_email = $email,
+                    WHERE id =".$id);
+    }
+
+//
 }

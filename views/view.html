@@ -13,26 +13,16 @@
     padding:10px;
   }
 </style>
-
-<table border="1px solid black">
-  <caption>Студент №<?php echo $newsItem['student_id']; ?></caption>
-  <tr>
-    <th>id</th>
-    <th>Имя</th>
-    <th>Фамилия</th>
-    <th>E-mail</th>
-      <th>Телефон</th>
-  </tr>
-    <tr>
+    <h3 align="center">Изменение данных <br>
+    Студент <?php echo $newsItem['student_sirname']." ".$newsItem['student_name']; ?></h3>
   <?php foreach ($newsItem as $item) : ?>
 
+      <input type="text" name="change" value="<?php echo $item; ?>">
 
-    <td><?php echo $item; ?></td>
 
     <?php endforeach; ?>
-    </tr>
 
+<input type="submit" name="submit" value="Сохранить">
 
-</table>
 </body>
 </html>
