@@ -11,9 +11,9 @@ namespace Vendor\Dir\Controllers;
 
 class ProductController
 {
-    public function actionIndex()
+    public function actionList()
     {
-        echo 'Pr action';
+        echo 'Product action';
         return true;
 
     }
