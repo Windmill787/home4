@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Запись номер <?php echo $newsItem['student_id']; ?></title>
+</head>
+<body>
+<style>
+  table{
+    border-collapse:collapse;
+  }
+  td{
+    padding:10px;
+  }
+</style>
+
+<table border="1px solid black">
+  <caption>Студент №<?php echo $newsItem['student_id']; ?></caption>
+  <tr>
+    <th>id</th>
+    <th>Имя</th>
+    <th>Фамилия</th>
+    <th>E-mail</th>
+      <th>Телефон</th>
+  </tr>
+    <tr>
+  <?php foreach ($newsItem as $item) : ?>
+
+
+    <td><?php echo $item; ?></td>
+
+    <?php endforeach; ?>
+    </tr>
+
+
+</table>
+</body>
+</html>

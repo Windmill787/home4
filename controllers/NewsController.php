@@ -25,6 +25,7 @@ class NewsController
     {
         if ($id){
             $newsItem = News::getNewsItemById($id);
+            require_once (ROOT.'/views/view.html');
 
         }
         return true;

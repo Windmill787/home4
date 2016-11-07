@@ -17,7 +17,12 @@ class News
 
            $db = Connector::getConnection();
 
-            $result = $db->query('SELECT * FROM University WHERE university_id='.$id);
+            $result = $db->query('SELECT student_id, 
+                    student_name, 
+                    student_sirname, 
+                    student_email, 
+                    student_telnumber 
+                    FROM Student WHERE student_id='.$id);
 
             $result ->setFetchMode(PDO::FETCH_ASSOC);
 
@@ -34,15 +39,16 @@ class News
 
         $newsList = array();
 
-        $result = $db->query('SELECT * FROM University');
+        $result = $db->query('SELECT * FROM Student');
 
         $i=0;
 
         while ($row = $result->fetch()){
-            $newsList[$i]['university_id'] = $row['university_id'];
-            $newsList[$i]['university_name'] = $row['university_name'];
-            $newsList[$i]['university_city'] = $row['university_city'];
-            $newsList[$i]['university_site'] = $row['university_site'];
+            $newsList[$i]['student_id'] = $row['student_id'];
+            $newsList[$i]['student_name'] = $row['student_name'];
+            $newsList[$i]['student_sirname'] = $row['student_sirname'];
+            $newsList[$i]['student_email'] = $row['student_email'];
+            $newsList[$i]['student_telnumber'] = $row['student_telnumber'];
             $i++;
         }
         return $newsList;

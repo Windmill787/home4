@@ -15,21 +15,22 @@
 </style>
 
 <table border="1px solid black">
-    <caption>University</caption>
     <tr>
         <th>id</th>
-        <th>name</th>
-        <th>city</th>
-        <th>site</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>E-mail</th>
+        <th>Телефон</th>
 </tr>
 
       <?php foreach ($newsList as $newsItem) : ?>
 
     <tr>
-        <td><?php echo $newsItem['university_id']; ?></td>
-        <td><?php echo $newsItem['university_name']; ?></td>
-        <td><?php echo $newsItem['university_city']; ?></td>
-        <td><?php echo $newsItem['university_site']; ?></td>
+        <td><?php echo $newsItem['student_id']; ?></td>
+        <td><?php echo $newsItem['student_name']; ?></td>
+        <td><?php echo $newsItem['student_sirname']; ?></td>
+        <td><?php echo $newsItem['student_email']; ?></td>
+        <td><?php echo $newsItem['student_telnumber']; ?></td>
     <tr>
       <?php endforeach; ?>
 
