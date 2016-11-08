@@ -7,7 +7,7 @@
  * Time: 15:25
  */
 
-class News
+class MainModel
 {
     public static function getNewsItemById($id)
     {
@@ -55,17 +55,34 @@ class News
 
     }
 
-    public static function changeItem()
+    public static function addNewItem()
     {
-
         $db = Connector::getConnection();
 
-        $result1 = $result = $db->query("UPDATE Students 
-                    SET student_name = $name, 
-                    student_sirname = $sirname, 
-                    student_email = $email,
-                    WHERE id =".$id);
+        $sql = $db->query("INSERT INTO Student 
+                    (student_name, student_sirname, student_email, student_telnumber)
+                              VALUES 
+                    ('student_name', 'student_sirname', 'student_email', 'student_telnumber')");
+
+        echo '<br>'.$sql->rowCount().'<br>';
+        echo $db->lastInsertId().'<br>';
+
+        print_r($sql);
+        return $sql;
+
+        /*$name = 'Олег';
+        $sirname = 'Валерьянович';
+        $email = 'Valeroleg@gmail.com';
+        $telnumber = '80677546389';
+
+        $stmt->bindValue(':student_name', $name);
+        $stmt->bindValue(':student_sirname', $sirname);
+        $stmt->bindValue(':student_email', $email);
+        $stmt->bindValue(':student_telnumber', $telnumber);
+        echo '<br>'.$stmt->rowCount().'<br>';
+        echo $db->lastInsertId().'<br>';
+        print_r($stmt);
+        return $stmt->execute();*/
     }
 
-//
 }

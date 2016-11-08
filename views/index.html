@@ -6,21 +6,36 @@
 </head>
 <body>
 <style>
-  table{
-    border-collapse:collapse;
-  }
-  td{
-    padding:10px;
-  }
+    table{
+        border-collapse:collapse;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    th{
+        text-align: center;
+    }
+    td{
+        padding:10px;
+    }
+    a{
+        text-decoration: none;
+        color: darkslategrey;
+        display: block;
+        padding: 10px;
+    }
+    a:hover{
+        background-color: lightsalmon;
+    }
 </style>
 
 <table border="1px solid black">
     <tr>
-        <th>id</th>
+        <th>Номер</th>
         <th>Имя</th>
         <th>Фамилия</th>
         <th>E-mail</th>
         <th>Телефон</th>
+        <th colspan="2"><a href="./main/add">Добавить студента</a></th>
 </tr>
 
       <?php foreach ($newsList as $newsItem) : ?>
@@ -31,10 +46,14 @@
         <td><?php echo $newsItem['student_sirname']; ?></td>
         <td><?php echo $newsItem['student_email']; ?></td>
         <td><?php echo $newsItem['student_telnumber']; ?></td>
-        <td><a href="./<?php echo $newsItem['student_id']; ?>">Изменить</a></td>
-        <td><a href="./<?php echo $newsItem['student_id']; ?>">Удалить</a></td>
+
+
+        <td><a href="./main/edit/<?php echo $newsItem['student_id']; ?>">Изменить</a></td>
+
+        <td><a href="./main/edit/<?php echo $newsItem['student_id']; ?>">Удалить</a></td>
+        <?php endforeach; ?>
     <tr>
-      <?php endforeach; ?>
+
 
 
 </table>
