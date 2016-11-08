@@ -9,8 +9,8 @@
 
 </style>
     <h3 align="center">Изменение данных <br>
-    Студент <?php echo $newsItem['student_sirname']." ".$newsItem['student_name']; ?></h3>
-  <?php foreach ($newsItem as $item) : ?>
+    Студент <?php echo $editItem['student_sirname']." ".$editItem['student_name']; ?></h3>
+  <?php foreach ($editItem as $item) : ?>
 
       <input type="text" name="change" value="<?php echo $item; ?>">
 

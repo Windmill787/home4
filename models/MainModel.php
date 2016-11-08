@@ -9,7 +9,7 @@
 
 class MainModel
 {
-    public static function getNewsItemById($id)
+    public static function editItem($id)
     {
         $id = intval($id);
 
@@ -17,23 +17,32 @@ class MainModel
 
            $db = Connector::getConnection();
 
-            $result = $db->query('SELECT  
-                    student_name, 
-                    student_sirname, 
-                    student_email, 
-                    student_telnumber 
-            FROM Student WHERE student_id='.$id);
+            $sql = "UPDATE Student SET student_name = :student_name, 
+                                        student_sirname = :student_sirname, 
+                                        student_email = :student_email, 
+                                        student_telnumber = :student_telnumber 
+                                        WHERE student_id = $id";
 
-            $result ->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt = $db->prepare($sql);
 
-            $newsItem = $result->fetch();
+            $name = 'cname';
+            $sirname = 'csirname';
+            $email = 'cemail';
+            $telnumber = 'c80677546389';
 
-            return $newsItem;
+            $stmt->bindValue(':student_name', $name);
+            $stmt->bindValue(':student_sirname', $sirname);
+            $stmt->bindValue(':student_email', $email);
+            $stmt->bindValue(':student_telnumber', $telnumber);
+
+            echo $db->lastInsertId().'<br>';
+
+            return $stmt->execute();
         }
 
     }
 
-    public static function getNewsList()
+    public static function getItemList()
     {
         $db = Connector::getConnection();
 
@@ -59,19 +68,15 @@ class MainModel
     {
         $db = Connector::getConnection();
 
-        $sql = $db->query("INSERT INTO Student 
+        $sql = "INSERT INTO Student 
                     (student_name, student_sirname, student_email, student_telnumber)
                               VALUES 
-                    ('student_name', 'student_sirname', 'student_email', 'student_telnumber')");
+                    (:student_name, :student_sirname, :student_email, :student_telnumber)";
 
-        echo '<br>'.$sql->rowCount().'<br>';
-        echo $db->lastInsertId().'<br>';
+        $stmt = $db->prepare($sql);
 
-        print_r($sql);
-        return $sql;
-
-        /*$name = 'Олег';
-        $sirname = 'Валерьянович';
+        $name = 'oleg';
+        $sirname = 'val';
         $email = 'Valeroleg@gmail.com';
         $telnumber = '80677546389';
 
@@ -79,10 +84,28 @@ class MainModel
         $stmt->bindValue(':student_sirname', $sirname);
         $stmt->bindValue(':student_email', $email);
         $stmt->bindValue(':student_telnumber', $telnumber);
-        echo '<br>'.$stmt->rowCount().'<br>';
+
         echo $db->lastInsertId().'<br>';
-        print_r($stmt);
-        return $stmt->execute();*/
+
+        return $stmt->execute();
+
+
     }
 
+    public static function deleteItem($id)
+    {
+        $id = intval($id);
+
+        if($id){
+
+            $db = Connector::getConnection();
+
+            $sql = "DELETE FROM Student WHERE student_id = $id";
+
+            $result = $db->query($sql);
+
+            return $result;
+        }
+
+    }
 }

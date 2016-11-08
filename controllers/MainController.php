@@ -13,7 +13,7 @@ class MainController
     public function actionIndex()
     {
         $newsList = array();
-        $newsList = MainModel::getNewsList();
+        $newsList = MainModel::getItemList();
 
         require_once (ROOT.'/views/index.html');
 
@@ -24,9 +24,9 @@ class MainController
     public function actionEdit($id)
     {
         if ($id){
-            $newsItem = MainModel::getNewsItemById($id);
+            $editItem = MainModel::editItem($id);
 
-            require_once (ROOT.'/views/view.html');
+            require_once (ROOT.'/views/edit.html');
 
         }
         return true;
@@ -41,14 +41,14 @@ class MainController
         return true;
     }
 
-    /*public function actionDelete($id)
+    public function actionDelete($id)
     {
         if ($id){
-            $deleteItem = News::deleteItem($id);
-            require_once (ROOT.'/views/index.html');
+            $deleteItem = MainModel::deleteItem($id);
+            require_once (ROOT.'/views/delete.html');
 
         }
         return true;
-    }*/
+    }
 
 }
