@@ -14,30 +14,30 @@ class MainModel
         $id = intval($id);
 
         if($id){
+            if (isset($_POST['submit'])) {
 
-           $db = Connector::getConnection();
+                $db = Connector::getConnection();
 
-            $sql = "UPDATE Student SET student_name = :student_name, 
+                $sql = "UPDATE Student SET student_name = :student_name, 
                                         student_sirname = :student_sirname, 
                                         student_email = :student_email, 
                                         student_telnumber = :student_telnumber 
                                         WHERE student_id = $id";
 
-            $stmt = $db->prepare($sql);
+                $stmt = $db->prepare($sql);
 
-            $name = 'cname';
-            $sirname = 'csirname';
-            $email = 'cemail';
-            $telnumber = 'c80677546389';
+                $name = $_POST['student_name'];
+                $sirname = $_POST['student_sirname'];
+                $email = $_POST['student_email'];
+                $telnumber = $_POST['student_telnumber'];
 
-            $stmt->bindValue(':student_name', $name);
-            $stmt->bindValue(':student_sirname', $sirname);
-            $stmt->bindValue(':student_email', $email);
-            $stmt->bindValue(':student_telnumber', $telnumber);
+                $stmt->bindValue(':student_name', $name);
+                $stmt->bindValue(':student_sirname', $sirname);
+                $stmt->bindValue(':student_email', $email);
+                $stmt->bindValue(':student_telnumber', $telnumber);
 
-            echo $db->lastInsertId().'<br>';
-
-            return $stmt->execute();
+                return $stmt->execute();
+            }
         }
 
     }
@@ -66,28 +66,30 @@ class MainModel
 
     public static function addNewItem()
     {
-        $db = Connector::getConnection();
+        if(isset($_POST['submit']))
+        {
 
-        $sql = "INSERT INTO Student 
+            $db = Connector::getConnection();
+
+            $sql = "INSERT INTO Student 
                     (student_name, student_sirname, student_email, student_telnumber)
                               VALUES 
                     (:student_name, :student_sirname, :student_email, :student_telnumber)";
 
-        $stmt = $db->prepare($sql);
+            $stmt = $db->prepare($sql);
 
-        $name = 'oleg';
-        $sirname = 'val';
-        $email = 'Valeroleg@gmail.com';
-        $telnumber = '80677546389';
+            $name = $_POST['student_name'];
+            $sirname = $_POST['student_sirname'];
+            $email = $_POST['student_email'];
+            $telnumber = $_POST['student_telnumber'];
 
-        $stmt->bindValue(':student_name', $name);
-        $stmt->bindValue(':student_sirname', $sirname);
-        $stmt->bindValue(':student_email', $email);
-        $stmt->bindValue(':student_telnumber', $telnumber);
+            $stmt->bindValue(':student_name', $name);
+            $stmt->bindValue(':student_sirname', $sirname);
+            $stmt->bindValue(':student_email', $email);
+            $stmt->bindValue(':student_telnumber', $telnumber);
 
-        echo $db->lastInsertId().'<br>';
-
-        return $stmt->execute();
+            return $stmt->execute();
+        }
 
 
     }
