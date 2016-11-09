@@ -24,6 +24,9 @@ class MainController
     public function actionEdit($id)
     {
         if ($id){
+
+            $fetchItem = MainModel::fetchData($id);
+
             $editItem = MainModel::editItem($id);
 
             require_once (ROOT.'/views/edit.html');

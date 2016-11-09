@@ -5,6 +5,22 @@
   <title>Удаление</title>
 </head>
 <body>
-
+<style>
+  a{
+    text-decoration: none;
+    color: darkslategrey;
+    display: block;
+    width: 40px;
+    padding: 10px;
+  }
+  a:hover{
+    background-color: lightsalmon;
+  }
+</style>
+<a href="javascript:history.back();">Назад</a>
+<h3 align="center">Вы уверенны что хотите удалить студента номер <?php echo $id; ?></h3>
+<form name="form" method="post">
+  <input type="submit" name="submit" value="Удалить" />
+</form>
 </body>
 </html>

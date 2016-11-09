@@ -14,6 +14,7 @@ class MainModel
         $id = intval($id);
 
         if($id){
+
             if (isset($_POST['submit'])) {
 
                 $db = Connector::getConnection();
@@ -38,6 +39,25 @@ class MainModel
 
                 return $stmt->execute();
             }
+        }
+
+    }
+
+    public static function fetchData($id)
+    {
+        $id = intval($id);
+
+        if($id) {
+
+            $db = Connector::getConnection();
+
+            $sql = $db->query("SELECT student_name, student_sirname, student_email, 
+                                      student_telnumber FROM Student WHERE student_id=$id");
+
+            $fetchItem = $sql->fetch();
+
+            return $fetchItem;
+
         }
 
     }
@@ -99,14 +119,16 @@ class MainModel
         $id = intval($id);
 
         if($id){
+            if(isset($_POST['submit'])) {
 
-            $db = Connector::getConnection();
+                $db = Connector::getConnection();
 
-            $sql = "DELETE FROM Student WHERE student_id = $id";
+                $sql = "DELETE FROM Student WHERE student_id = $id";
 
-            $result = $db->query($sql);
+                $result = $db->query($sql);
 
-            return $result;
+                return $result;
+            }
         }
 
     }
