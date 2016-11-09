@@ -47,6 +47,8 @@ class MainController
     public function actionDelete($id)
     {
         if ($id){
+
+            $fetchItem = MainModel::fetchData($id);
             $deleteItem = MainModel::deleteItem($id);
             require_once (ROOT.'/views/delete.html');
 

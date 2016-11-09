@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Добавление</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <style>
@@ -16,16 +17,49 @@
   a:hover{
     background-color: lightsalmon;
   }
+
+  .submit{
+    width: 100px;
+    height: 30px;
+    border: 2px solid black;
+    background-color: white;
+    margin-left: 595px;
+
+  }
+
+  .submit:hover{
+    background-color: lightsalmon;
+    border-color: black;
+  }
+
+  input {
+    border-radius: 5px;
+    border: 2px solid black;
+    width: 300px;
+    height: 24px;
+    font-size: 16px;
+    padding: 4px;
+    margin-left: 485px;
+  }
+
+  input:hover{
+    border-color: lightsalmon;
+  }
+
+  input:focus {
+    border-color: brown;
+    outline: none;
+  }
 </style>
 <a href="javascript:history.back();">Назад</a>
 <h3 align="center">Новый студент</h3>
 
 <form name="form" method="post">
-<input type="text" name="student_name" />
-<input type="text" name="student_sirname" />
-<input type="text" name="student_email" />
-<input type="text" name="student_telnumber" />
-<input type="submit" name="submit" value="Добавить" />
+<input type="text" name="student_name" placeholder="Имя" required/><br><br>
+<input type="text" name="student_sirname" placeholder="Фамилия" required/><br><br>
+<input type="text" name="student_email" placeholder="Электронная почта"/><br><br>
+<input type="text" name="student_telnumber" placeholder="Номер телефона"/><br><br>
+<input type="submit" class="submit" name="submit" value="Добавить" />
 </form>
 </body>
 </html>

@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
   <title>Редактирование</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <style>
+
     a{
         text-decoration: none;
         color: darkslategrey;
@@ -13,20 +16,64 @@
         width: 40px;
         padding: 10px;
     }
+
     a:hover{
         background-color: lightsalmon;
     }
+    .submit{
+        width: 100px;
+        height: 30px;
+        border: 2px solid black;
+        background-color: white;
+        margin-left: 595px;
+
+    }
+
+    .submit:hover{
+        background-color: lightsalmon;
+        border-color: black;
+    }
+
+    input {
+        border-radius: 5px;
+        border: 2px solid black;
+        width: 300px;
+        height: 24px;
+        font-size: 16px;
+        padding: 4px;
+        margin-left: 485px;
+    }
+
+    input:hover{
+        border-color: lightsalmon;
+    }
+
+    input:focus {
+        border-color: brown;
+        outline: none;
+    }
 </style>
 <a href="javascript:history.back();">Назад</a>
-    <h3 align="center">Изменение данных <br>Студент</h3>
+
+    <h3 align="center">Изменение данных <br>Студент <?php echo $fetchItem['student_sirname'].' '.
+            $fetchItem['student_name']; ?></h3>
 
 <form name="form" method="post">
 
-    <input type="text" name="student_name" value="<?php echo $fetchItem['student_name'] ?>"/>
-    <input type="text" name="student_sirname" value="<?php echo $fetchItem['student_sirname'] ?>" />
-    <input type="text" name="student_email" value="<?php echo $fetchItem['student_email'] ?>" />
-    <input type="text" name="student_telnumber" value="<?php echo $fetchItem['student_telnumber'] ?>" />
-    <input type="submit" name="submit" value="Сохранить">
+    <input type="text" name="student_name" placeholder="Имя"
+           value="<?php echo $fetchItem['student_name'] ?>" required/><br><br>
+
+    <input type="text" name="student_sirname" placeholder="Фамилия"
+           value="<?php echo $fetchItem['student_sirname'] ?>" required/><br><br>
+
+    <input type="text" name="student_email" placeholder="Электронная почта"
+           value="<?php echo $fetchItem['student_email'] ?>" required/><br><br>
+
+    <input type="text" name="student_telnumber" placeholder="Номер телефона"
+           value="<?php echo $fetchItem['student_telnumber'] ?>" required/><br><br>
+
+
+    <input type="submit" class="submit" name="submit" value="Сохранить">
 
 </form>
 

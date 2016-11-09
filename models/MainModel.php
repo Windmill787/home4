@@ -38,6 +38,7 @@ class MainModel
                 $stmt->bindValue(':student_telnumber', $telnumber);
 
                 return $stmt->execute();
+
             }
         }
 
@@ -102,6 +103,13 @@ class MainModel
             $sirname = $_POST['student_sirname'];
             $email = $_POST['student_email'];
             $telnumber = $_POST['student_telnumber'];
+
+            if ($email == NULL){
+                $email = '-';
+            }
+            if ($telnumber == NULL){
+                $telnumber = '-';
+            }
 
             $stmt->bindValue(':student_name', $name);
             $stmt->bindValue(':student_sirname', $sirname);
