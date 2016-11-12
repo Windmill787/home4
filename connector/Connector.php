@@ -20,6 +20,8 @@ class Connector
 
         $db = new PDO($dsn, $params['user'], $params['password']);
 
+        $db->exec("set names utf8");
+
         return $db;
     }
 

@@ -1,12 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
   <title>Homework№4</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <style>
+    select{
+        outline: none;
+        position: absolute;
+        width: 150px;
+        height: 30px;
+        font-size: 16px;
+        background-color: lightsalmon;
+        border: 2px solid black;
+    }
     table{
         border-collapse:collapse;
         margin-left: auto;
@@ -28,7 +37,29 @@
     a:hover{
         background-color: lightsalmon;
     }
+    .sub{
+        width: 150px;
+        height: 30px;
+        border: 2px solid black;
+        background-color: white;
+        position: absolute;
+        top: 45px;
+    }
+
+    .sub:hover{
+        background-color: lightsalmon;
+        border-color: black;
+    }
 </style>
+<form name="main" method="post">
+    <select>
+        <option value="University">Университеты</option>
+        <option value="Department">Кафедры</option>
+        <option value="Student">Студенты</option>
+        <option value="Homework">Список ДЗ</option>
+    </select>
+    <input class="sub" type="submit" name="submit" value="Отправить" />
+</form>
 
 <table border="1px solid black">
     <tr>
@@ -43,7 +74,7 @@
       <?php foreach ($newsList as $newsItem) : ?>
 
     <tr>
-        <td><?php echo $newsItem['student_id']; ?></td>
+        <td><?php echo $newsItem["student_id"]; ?></td>
         <td><?php echo $newsItem['student_name']; ?></td>
         <td><?php echo $newsItem['student_sirname']; ?></td>
         <td><?php echo $newsItem['student_email']; ?></td>
@@ -54,7 +85,7 @@
 
         <td><a href="./main/delete/<?php echo $newsItem['student_id']; ?>">Удалить</a></td>
         <?php endforeach; ?>
-    <tr>
+    </tr>
 
 
 

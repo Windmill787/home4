@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <title>Добавление</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="<?php echo ROOT.'/css/style.css'; ?>" />
 </head>
+
 <body>
 <style>
-  a{
+  a {
     text-decoration: none;
     color: darkslategrey;
     display: block;
-    width: 40px;
+    width: 80px;
     padding: 10px;
   }
+
   a:hover{
     background-color: lightsalmon;
   }
@@ -42,7 +44,7 @@
     margin-left: 485px;
   }
 
-  input:hover{
+  input:hover {
     border-color: lightsalmon;
   }
 
@@ -51,15 +53,16 @@
     outline: none;
   }
 </style>
-<a href="javascript:history.back();">Назад</a>
+<a href="../main">На главную</a>
 <h3 align="center">Новый студент</h3>
-
 <form name="form" method="post">
 <input type="text" name="student_name" placeholder="Имя" required/><br><br>
 <input type="text" name="student_sirname" placeholder="Фамилия" required/><br><br>
 <input type="text" name="student_email" placeholder="Электронная почта"/><br><br>
 <input type="text" name="student_telnumber" placeholder="Номер телефона"/><br><br>
 <input type="submit" class="submit" name="submit" value="Добавить" />
+
+
 </form>
 </body>
 </html>

@@ -1,4 +1,4 @@
-a{
+a {
     text-decoration: none;
     color: darkslategrey;
     display: block;
@@ -9,6 +9,7 @@ a{
 a:hover{
     background-color: lightsalmon;
 }
+
 .submit{
     width: 100px;
     height: 30px;
@@ -33,7 +34,7 @@ input {
     margin-left: 485px;
 }
 
-input:hover{
+input:hover {
     border-color: lightsalmon;
 }
 

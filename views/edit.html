@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
 
@@ -13,7 +13,7 @@
         text-decoration: none;
         color: darkslategrey;
         display: block;
-        width: 40px;
+        width: 80px;
         padding: 10px;
     }
 
@@ -53,7 +53,7 @@
         outline: none;
     }
 </style>
-<a href="javascript:history.back();">Назад</a>
+<a href="../../main">На главную</a>
 
     <h3 align="center">Изменение данных <br>Студент <?php echo $fetchItem['student_sirname'].' '.
             $fetchItem['student_name']; ?></h3>
@@ -67,10 +67,10 @@
            value="<?php echo $fetchItem['student_sirname'] ?>" required/><br><br>
 
     <input type="text" name="student_email" placeholder="Электронная почта"
-           value="<?php echo $fetchItem['student_email'] ?>" required/><br><br>
+           value="<?php echo $fetchItem['student_email'] ?>"/><br><br>
 
     <input type="text" name="student_telnumber" placeholder="Номер телефона"
-           value="<?php echo $fetchItem['student_telnumber'] ?>" required/><br><br>
+           value="<?php echo $fetchItem['student_telnumber'] ?>"/><br><br>
 
 
     <input type="submit" class="submit" name="submit" value="Сохранить">

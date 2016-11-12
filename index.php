@@ -15,3 +15,4 @@ include_once (ROOT.'/connector/Connector.php');
 
 $obj1 = new Router();
 $obj1->run();
+$Model = new MainModel();

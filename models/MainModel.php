@@ -9,6 +9,9 @@
 
 class MainModel
 {
+
+    public $tablename = '';
+
     public static function editItem($id)
     {
         $id = intval($id);
@@ -16,6 +19,8 @@ class MainModel
         if($id){
 
             if (isset($_POST['submit'])) {
+
+                header('Location: ../../main');
 
                 $db = Connector::getConnection();
 
@@ -31,6 +36,13 @@ class MainModel
                 $sirname = $_POST['student_sirname'];
                 $email = $_POST['student_email'];
                 $telnumber = $_POST['student_telnumber'];
+
+                if ($email == NULL){
+                    $email = '-';
+                }
+                if ($telnumber == NULL){
+                    $telnumber = '-';
+                }
 
                 $stmt->bindValue(':student_name', $name);
                 $stmt->bindValue(':student_sirname', $sirname);
@@ -65,16 +77,23 @@ class MainModel
 
     public static function getItemList()
     {
+
         $db = Connector::getConnection();
 
         $newsList = array();
 
-        $result = $db->query('SELECT * FROM Student');
+        $obj1 = new MainModel();
+
+        $obj1->tablename = 'Student';
+
+        $result = $db->query("SELECT * FROM $obj1->tablename");
 
         $i=0;
 
+        $obj1->tablename = lcfirst($obj1->tablename);
+
         while ($row = $result->fetch()){
-            $newsList[$i]['student_id'] = $row['student_id'];
+            $newsList[$i]["student_id"] = $row["student_id"];
             $newsList[$i]['student_name'] = $row['student_name'];
             $newsList[$i]['student_sirname'] = $row['student_sirname'];
             $newsList[$i]['student_email'] = $row['student_email'];
@@ -89,6 +108,7 @@ class MainModel
     {
         if(isset($_POST['submit']))
         {
+            header('Location: ../main');
 
             $db = Connector::getConnection();
 
@@ -128,6 +148,7 @@ class MainModel
 
         if($id){
             if(isset($_POST['submit'])) {
+                header('Location: ../../main');
 
                 $db = Connector::getConnection();
 

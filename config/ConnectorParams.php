@@ -8,6 +8,6 @@
 return array(
     'host' => 'localhost',
     'dbname' => 'home4',
-    'user' => 'root',
-    'password' => 'crosshairsilverstyle13hfp',
+    'user' => 'vieweruser',
+    'password' => '12345',
 );
