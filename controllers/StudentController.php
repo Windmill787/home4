@@ -6,16 +6,15 @@
  * Time: 2:01
  */
 
-include ROOT.'/models/MainModel.php';
+include ROOT.'/models/StudentModel.php';
 
-class MainController
+class StudentController
 {
     public function actionIndex()
     {
-        $List = MainModel::getItemList();
+        $List = StudentModel::getItemList();
 
         require_once (ROOT.'/views/index.html');
-
 
         return true;
     }
@@ -24,9 +23,9 @@ class MainController
     {
         if ($id){
 
-            $fetchItem = MainModel::fetchData($id);
+            $fetchItem = StudentModel::fetchData($id);
 
-            $editItem = MainModel::editItem($id);
+            $editItem = StudentModel::editItem($id);
 
             require_once (ROOT.'/views/edit.html');
 
@@ -36,7 +35,7 @@ class MainController
 
     public function actionAdd()
     {
-        $addItem = MainModel::addNewItem();
+        $addItem = StudentModel::addNewItem();
 
         require_once (ROOT.'/views/add.html');
 
@@ -47,8 +46,10 @@ class MainController
     {
         if ($id){
 
-            $fetchItem = MainModel::fetchData($id);
-            $deleteItem = MainModel::deleteItem($id);
+            $fetchItem = StudentModel::fetchData($id);
+
+            $deleteItem = StudentModel::deleteItem($id);
+
             require_once (ROOT.'/views/delete.html');
 
         }

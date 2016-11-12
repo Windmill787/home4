@@ -50,15 +50,15 @@
     outline: none;
   }
 </style>
-<a href="../../main">На главную</a>
+<a href="../../student">На главную</a>
 <h3 align="center">Вы уверенны что хотите удалить студента номер <?php echo $id; ?>?</h3>
-<input type="text" value="<?php echo $fetchItem['student_name'] ?>" readonly required/><br><br>
+<input type="text" value="<?php echo $fetchItem->dataArray[1] ?>" readonly required/><br><br>
 
-<input type="text" value="<?php echo $fetchItem['student_sirname'] ?>" readonly required/><br><br>
+<input type="text" value="<?php echo $fetchItem->dataArray[2] ?>" readonly required/><br><br>
 
-<input type="text" value="<?php echo $fetchItem['student_email'] ?>" readonly required/><br><br>
+<input type="text" value="<?php echo $fetchItem->dataArray[3] ?>" readonly required/><br><br>
 
-<input type="text" value="<?php echo $fetchItem['student_telnumber'] ?>" readonly required/><br><br>
+<input type="text" value="<?php echo $fetchItem->dataArray[4] ?>" readonly required/><br><br>
 <form name="form" method="post">
   <input type="submit" class="submit" name="submit" value="Удалить" />
 </form>

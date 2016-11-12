@@ -68,24 +68,27 @@
         <th>Фамилия</th>
         <th>E-mail</th>
         <th>Телефон</th>
-        <th colspan="2"><a href="./main/add">Добавить студента</a></th>
+        <th colspan="2"><a href="./student/add">Добавить студента</a></th>
 </tr>
 
-      <?php foreach ($List->dataArray as $item) : ?>
+      <?php
+      foreach ($List->dataArray as $item) : ?>
 
     <tr>
-        <td><?php echo $item[$List->tablename."_id"]; ?></td>
-        <td><?php echo $item[$List->tablename.'_name']; ?></td>
-        <td><?php echo $item[$List->tablename.'_sirname']; ?></td>
-        <td><?php echo $item[$List->tablename.'_email']; ?></td>
-        <td><?php echo $item[$List->tablename.'_telnumber']; ?></td>
+        <td><?php echo $item[0]; ?></td>
+        <td><?php echo $item[1]; ?></td>
+        <td><?php echo $item[2]; ?></td>
+        <td><?php echo $item[3]; ?></td>
+        <td><?php echo $item[4]; ?></td>
 
 
-        <td><a href="./main/edit/<?php echo $item[$List->tablename.'_id']; ?>">Изменить</a></td>
 
-        <td><a href="./main/delete/<?php echo $item[$List->tablename.'_id']; ?>">Удалить</a></td>
-        <?php endforeach; ?>
+        <td><a href="./student/edit/<?php echo $item[0]; ?>">Изменить</a></td>
+
+        <td><a href="./student/delete/<?php echo $item[0]; ?>">Удалить</a></td>
     </tr>
+   <?php endforeach; ?>
+
 
 
 

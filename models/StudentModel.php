@@ -7,7 +7,7 @@
  * Time: 15:25
  */
 
-class MainModel
+class StudentModel
 {
 
     public $tablename = '';
@@ -20,9 +20,15 @@ class MainModel
 
         if($id){
 
+            $edit = StudentModel::setTable('Student');
+
+            echo lcfirst($edit->tablename);
+
+            echo ucfirst($edit->tablename);
+
             if (isset($_POST['submit'])) {
 
-                header('Location: ../../main');
+                header('Location: ../../student');
 
                 $db = Connector::getConnection();
 
@@ -66,12 +72,13 @@ class MainModel
 
             $db = Connector::getConnection();
 
-            $sql = $db->query("SELECT student_name, student_sirname, student_email, 
-                                      student_telnumber FROM Student WHERE student_id=$id");
+            $fetch = StudentModel::setTable('Student');
 
-            $fetchItem = $sql->fetch();
+            $sql = $db->query("SELECT * FROM $fetch->tablename WHERE ".lcfirst($fetch->tablename)."_id=$id");
 
-            return $fetchItem;
+            $fetch->dataArray = $sql->fetch(PDO::FETCH_NUM);
+
+            return $fetch;
 
         }
 
@@ -82,7 +89,7 @@ class MainModel
 
         $db = Connector::getConnection();
 
-        $obj1 = MainModel::setTable('Student');
+        $obj1 = StudentModel::setTable('Student');
 
         $result = $db->query("SELECT * FROM $obj1->tablename");
 
@@ -90,12 +97,9 @@ class MainModel
 
         $obj1->tablename = lcfirst($obj1->tablename);
 
-        while ($row = $result->fetch()){
-            $obj1->dataArray[$i][$obj1->tablename."_id"] = $row[$obj1->tablename."_id"];
-            $obj1->dataArray[$i][$obj1->tablename.'_name'] = $row[$obj1->tablename.'_name'];
-            $obj1->dataArray[$i][$obj1->tablename.'_sirname'] = $row[$obj1->tablename.'_sirname'];
-            $obj1->dataArray[$i][$obj1->tablename.'_email'] = $row[$obj1->tablename.'_email'];
-            $obj1->dataArray[$i][$obj1->tablename.'_telnumber'] = $row[$obj1->tablename.'_telnumber'];
+
+        while ($row = $result->fetch(PDO::FETCH_NUM)){
+            $obj1->dataArray[$i] = $row;
             $i++;
         }
         return $obj1;
@@ -104,23 +108,32 @@ class MainModel
 
     public static function addNewItem()
     {
+        $new = StudentModel::setTable('student');
+
+        echo ucfirst($new->tablename);
+
         if(isset($_POST['submit']))
         {
-            header('Location: ../main');
+            header('Location: ../student');
 
             $db = Connector::getConnection();
 
-            $sql = "INSERT INTO Student 
-                    (student_name, student_sirname, student_email, student_telnumber)
+            $sql = "INSERT INTO ".ucfirst($new->tablename)."
+                (".
+                $new->tablename.'_name,'.
+                $new->tablename.'_sirname,'.
+                $new->tablename.'_email,'.
+                $new->tablename.'_telnumber'.
+                ")
                               VALUES 
-                    (:student_name, :student_sirname, :student_email, :student_telnumber)";
+                    (:1, :2, :3, :4)";
 
             $stmt = $db->prepare($sql);
 
-            $name = $_POST['student_name'];
-            $sirname = $_POST['student_sirname'];
-            $email = $_POST['student_email'];
-            $telnumber = $_POST['student_telnumber'];
+            $name = $_POST[1];
+            $sirname = $_POST[2];
+            $email = $_POST[3];
+            $telnumber = $_POST[4];
 
             if ($email == NULL){
                 $email = '-';
@@ -129,10 +142,10 @@ class MainModel
                 $telnumber = '-';
             }
 
-            $stmt->bindValue(':student_name', $name);
-            $stmt->bindValue(':student_sirname', $sirname);
-            $stmt->bindValue(':student_email', $email);
-            $stmt->bindValue(':student_telnumber', $telnumber);
+            $stmt->bindValue(':1', $name);
+            $stmt->bindValue(':2', $sirname);
+            $stmt->bindValue(':3', $email);
+            $stmt->bindValue(':4', $telnumber);
 
             return $stmt->execute();
         }
@@ -144,13 +157,15 @@ class MainModel
     {
         $id = intval($id);
 
+        $delete = StudentModel::setTable('Student');
+
         if($id){
             if(isset($_POST['submit'])) {
-                header('Location: ../../main');
+                header('Location: ../../student');
 
                 $db = Connector::getConnection();
 
-                $sql = "DELETE FROM Student WHERE student_id = $id";
+                $sql = "DELETE FROM $delete->tablename WHERE ".$delete->tablename.'_id='.$id;
 
                 $result = $db->query($sql);
 
@@ -162,7 +177,7 @@ class MainModel
 
     public static function setTable($tablename){
 
-        $tableobject = new MainModel();
+        $tableobject = new StudentModel();
 
         $tableobject->tablename = $tablename;
 
