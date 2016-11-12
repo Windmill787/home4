@@ -71,19 +71,19 @@
         <th colspan="2"><a href="./main/add">Добавить студента</a></th>
 </tr>
 
-      <?php foreach ($newsList as $newsItem) : ?>
+      <?php foreach ($List->dataArray as $item) : ?>
 
     <tr>
-        <td><?php echo $newsItem["student_id"]; ?></td>
-        <td><?php echo $newsItem['student_name']; ?></td>
-        <td><?php echo $newsItem['student_sirname']; ?></td>
-        <td><?php echo $newsItem['student_email']; ?></td>
-        <td><?php echo $newsItem['student_telnumber']; ?></td>
+        <td><?php echo $item[$List->tablename."_id"]; ?></td>
+        <td><?php echo $item[$List->tablename.'_name']; ?></td>
+        <td><?php echo $item[$List->tablename.'_sirname']; ?></td>
+        <td><?php echo $item[$List->tablename.'_email']; ?></td>
+        <td><?php echo $item[$List->tablename.'_telnumber']; ?></td>
 
 
-        <td><a href="./main/edit/<?php echo $newsItem['student_id']; ?>">Изменить</a></td>
+        <td><a href="./main/edit/<?php echo $item[$List->tablename.'_id']; ?>">Изменить</a></td>
 
-        <td><a href="./main/delete/<?php echo $newsItem['student_id']; ?>">Удалить</a></td>
+        <td><a href="./main/delete/<?php echo $item[$List->tablename.'_id']; ?>">Удалить</a></td>
         <?php endforeach; ?>
     </tr>
 

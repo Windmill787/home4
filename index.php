@@ -13,6 +13,5 @@ define('ROOT', dirname(__FILE__));
 require_once (ROOT.'/components/Router.php');
 include_once (ROOT.'/connector/Connector.php');
 
-$obj1 = new Router();
-$obj1->run();
-$Model = new MainModel();
+$router = new Router();
+$router->run();

@@ -12,6 +12,8 @@ class MainModel
 
     public $tablename = '';
 
+    public $dataArray = array();
+
     public static function editItem($id)
     {
         $id = intval($id);
@@ -80,11 +82,7 @@ class MainModel
 
         $db = Connector::getConnection();
 
-        $newsList = array();
-
-        $obj1 = new MainModel();
-
-        $obj1->tablename = 'Student';
+        $obj1 = MainModel::setTable('Student');
 
         $result = $db->query("SELECT * FROM $obj1->tablename");
 
@@ -93,14 +91,14 @@ class MainModel
         $obj1->tablename = lcfirst($obj1->tablename);
 
         while ($row = $result->fetch()){
-            $newsList[$i]["student_id"] = $row["student_id"];
-            $newsList[$i]['student_name'] = $row['student_name'];
-            $newsList[$i]['student_sirname'] = $row['student_sirname'];
-            $newsList[$i]['student_email'] = $row['student_email'];
-            $newsList[$i]['student_telnumber'] = $row['student_telnumber'];
+            $obj1->dataArray[$i][$obj1->tablename."_id"] = $row[$obj1->tablename."_id"];
+            $obj1->dataArray[$i][$obj1->tablename.'_name'] = $row[$obj1->tablename.'_name'];
+            $obj1->dataArray[$i][$obj1->tablename.'_sirname'] = $row[$obj1->tablename.'_sirname'];
+            $obj1->dataArray[$i][$obj1->tablename.'_email'] = $row[$obj1->tablename.'_email'];
+            $obj1->dataArray[$i][$obj1->tablename.'_telnumber'] = $row[$obj1->tablename.'_telnumber'];
             $i++;
         }
-        return $newsList;
+        return $obj1;
 
     }
 
@@ -159,6 +157,16 @@ class MainModel
                 return $result;
             }
         }
+
+    }
+
+    public static function setTable($tablename){
+
+        $tableobject = new MainModel();
+
+        $tableobject->tablename = $tablename;
+
+        return $tableobject;
 
     }
 }

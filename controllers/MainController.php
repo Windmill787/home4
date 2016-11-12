@@ -12,8 +12,7 @@ class MainController
 {
     public function actionIndex()
     {
-        $newsList = array();
-        $newsList = MainModel::getItemList();
+        $List = MainModel::getItemList();
 
         require_once (ROOT.'/views/index.html');
 

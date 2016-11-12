@@ -14,10 +14,16 @@
     display: block;
     width: 80px;
     padding: 10px;
+    border: 2px solid black;
   }
 
   a:hover{
     background-color: lightsalmon;
+  }
+
+  a:focus{
+    outline: none;
+    border: 2px solid brown;
   }
 
   .submit{
@@ -32,6 +38,9 @@
   .submit:hover{
     background-color: lightsalmon;
     border-color: black;
+  }
+  .submit:focus{
+    border: 2px solid brown;
   }
 
   input {
@@ -52,6 +61,7 @@
     border-color: brown;
     outline: none;
   }
+
 </style>
 <a href="../main">На главную</a>
 <h3 align="center">Новый студент</h3>
