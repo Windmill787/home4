@@ -11,8 +11,4 @@ return array(
     'student/delete/([0-9]+)' => 'student/delete/$1',
     'student/add' => 'student/add',
     'student' => 'student/index',
-    'university/edit/([0-9]+)' => 'university/edit/$1',
-    'university/delete/([0-9]+)' => 'university/delete/$1',
-    'university/add' => 'university/add',
-    'university' => 'university/index',
 );

@@ -22,10 +22,6 @@ class StudentModel
 
             $edit = StudentModel::setTable('Student');
 
-            echo lcfirst($edit->tablename);
-
-            echo ucfirst($edit->tablename);
-
             if (isset($_POST['submit'])) {
 
                 header('Location: ../../student');
@@ -86,50 +82,59 @@ class StudentModel
 
     public static function getItemList()
     {
+            $db = Connector::getConnection();
 
-        $db = Connector::getConnection();
+            $obj1 = StudentModel::setTable('Student');
 
-        $obj1 = StudentModel::setTable('Student');
+            $result = $db->query("SELECT * FROM $obj1->tablename");
 
-        $result = $db->query("SELECT * FROM $obj1->tablename");
+            $i = 0;
 
-        $i=0;
+            $obj1->tablename = lcfirst($obj1->tablename);
 
-        $obj1->tablename = lcfirst($obj1->tablename);
-
-
-        while ($row = $result->fetch(PDO::FETCH_NUM)){
-            $obj1->dataArray[$i] = $row;
-            $i++;
-        }
-        return $obj1;
-
+            while ($row = $result->fetch(PDO::FETCH_NUM)) {
+                $obj1->dataArray[$i] = $row;
+                $i++;
+            }
+            return $obj1;
     }
 
     public static function addNewItem()
     {
+        $db = Connector::getConnection();
+
         $new = StudentModel::setTable('student');
 
-        echo ucfirst($new->tablename);
+        $columns = $db->query("SHOW COLUMNS FROM Student");
+
+        $column = $columns->fetchAll(PDO::FETCH_NUM);
+
+        $str = '';
+
+        foreach ($column as $item)
+        {
+            $str .= $item[0].', ';
+
+        }
+        $str = substr($str, 0, -2);
 
         if(isset($_POST['submit']))
         {
-            header('Location: ../student');
-
-            $db = Connector::getConnection();
+            //header('Location: ../student');
 
             $sql = "INSERT INTO ".ucfirst($new->tablename)."
                 (".
-                $new->tablename.'_name,'.
-                $new->tablename.'_sirname,'.
-                $new->tablename.'_email,'.
-                $new->tablename.'_telnumber'.
+                $str
+                .
                 ")
                               VALUES 
-                    (:1, :2, :3, :4)";
+                    (NULL, :1, :2, :3, :4, NULL)";
 
             $stmt = $db->prepare($sql);
 
+            print_r($stmt);
+            echo '<br>';
+            
             $name = $_POST[1];
             $sirname = $_POST[2];
             $email = $_POST[3];
@@ -142,12 +147,19 @@ class StudentModel
                 $telnumber = '-';
             }
 
+
             $stmt->bindValue(':1', $name);
             $stmt->bindValue(':2', $sirname);
             $stmt->bindValue(':3', $email);
             $stmt->bindValue(':4', $telnumber);
 
-            return $stmt->execute();
+            echo $name.$sirname.$email.$telnumber;
+            echo '<br>';
+
+            echo $stmt->execute();
+            echo '<br>';
+
+
         }
 
 
