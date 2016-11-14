@@ -1,0 +1,17 @@
+{
+    "name": "max/home4",
+    "authors": [
+        {
+            "name": "Max Stoliarov",
+            "email": "Windmill_78@mail.ru"
+        }
+    ],
+    "require": {
+
+    },
+    "autoload":{
+        "psr-4": {
+            "Vendor\\src\\": ""
+        }
+    }
+}

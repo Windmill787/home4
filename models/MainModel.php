@@ -7,15 +7,8 @@
  * Time: 15:25
  */
 
-class MainModel
+class MainModel extends \Vendor\src\parameters\ModelParameters
 {
-
-    public $tablename;
-
-    public $dataArray = array();
-
-    public $columns;
-
     public static function editItem($id)
     {
         $id = intval($id);
