@@ -10,9 +10,11 @@
 class MainModel
 {
 
-    public $tablename = '';
+    public $tablename;
 
     public $dataArray = array();
+
+    public $columns;
 
     public static function editItem($id)
     {
@@ -24,7 +26,7 @@ class MainModel
 
             if (isset($_POST['submit'])) {
 
-                header('Location: ../../student');
+                header('Location: ../../main');
 
                 $db = Connector::getConnection();
 
@@ -82,10 +84,9 @@ class MainModel
 
     public static function getItemList()
     {
-        if (isset($_POST['submit'])) {
             $db = Connector::getConnection();
 
-            $obj1 = MainModel::setTable($_POST['tablename']);
+            $obj1 = MainModel::setTable('Student');
 
             $result = $db->query("SELECT * FROM $obj1->tablename");
 
@@ -98,43 +99,35 @@ class MainModel
                 $i++;
             }
             return $obj1;
-        }
+
     }
 
     public static function addNewItem()
     {
         $db = Connector::getConnection();
 
-        $new = MainModel::setTable('student');
+        $new = MainModel::setTable('Student');
 
-        $columns = $db->query("SHOW COLUMNS FROM Student");
-
-        $column = $columns->fetchAll(PDO::FETCH_NUM);
-
-        $str = '';
-
-        foreach ($column as $item)
-        {
-            $str .= $item[0].', ';
-
-        }
-        $str = substr($str, 0, -2);
-
-        echo $str.'<br>';
+        $new->columns = MainModel::getColumns($new->tablename);
 
         if(isset($_POST['submit']))
         {
-            //header('Location: ../student');
+            header('Location: ../main');
 
-            $sql = "INSERT INTO ".ucfirst($new->tablename)."(".$str.") VALUES 
-                    (NULL, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO ".$new->tablename."(".$new->columns.") VALUES 
+                    (NULL, :1, :2, :3, :4, :5)";
 
             $stmt = $db->prepare($sql);
 
-            return $stmt->execute(array($_POST[1], $_POST[2], $_POST[3], $_POST[4], $_POST[5]));
+            $execute = $stmt->execute(array(
+                ':1' => $_POST[1],
+                ':2' => $_POST[2],
+                ':3' => $_POST[3],
+                ':4' => $_POST[4],
+                ':5' => $_POST[5]
+                ));
+            return $execute;
         }
-
-
     }
 
     public static function deleteItem($id)
@@ -145,7 +138,7 @@ class MainModel
 
         if($id){
             if(isset($_POST['submit'])) {
-                header('Location: ../../student');
+                header('Location: ../../main');
 
                 $db = Connector::getConnection();
 
@@ -167,5 +160,25 @@ class MainModel
 
         return $tableobject;
 
+    }
+
+    public static function getColumns($tablename){
+
+        $db = Connector::getConnection();
+
+        $columns = $db->query("SHOW COLUMNS FROM $tablename");
+
+        $columns = $columns->fetchAll(PDO::FETCH_NUM);
+
+        $obj = new MainModel();
+
+        foreach ($columns as $item)
+        {
+            $obj->columns .= $item[0].', ';
+
+        }
+        $obj->columns = substr($obj->columns, 0, -2);
+
+        return $obj->columns;
     }
 }
