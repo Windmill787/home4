@@ -7,7 +7,7 @@
  * Time: 15:25
  */
 
-class StudentModel
+class MainModel
 {
 
     public $tablename = '';
@@ -20,7 +20,7 @@ class StudentModel
 
         if($id){
 
-            $edit = StudentModel::setTable('Student');
+            $edit = MainModel::setTable('Student');
 
             if (isset($_POST['submit'])) {
 
@@ -68,7 +68,7 @@ class StudentModel
 
             $db = Connector::getConnection();
 
-            $fetch = StudentModel::setTable('Student');
+            $fetch = MainModel::setTable('Student');
 
             $sql = $db->query("SELECT * FROM $fetch->tablename WHERE ".lcfirst($fetch->tablename)."_id=$id");
 
@@ -82,9 +82,10 @@ class StudentModel
 
     public static function getItemList()
     {
+        if (isset($_POST['submit'])) {
             $db = Connector::getConnection();
 
-            $obj1 = StudentModel::setTable('Student');
+            $obj1 = MainModel::setTable($_POST['tablename']);
 
             $result = $db->query("SELECT * FROM $obj1->tablename");
 
@@ -97,13 +98,14 @@ class StudentModel
                 $i++;
             }
             return $obj1;
+        }
     }
 
     public static function addNewItem()
     {
         $db = Connector::getConnection();
 
-        $new = StudentModel::setTable('student');
+        $new = MainModel::setTable('student');
 
         $columns = $db->query("SHOW COLUMNS FROM Student");
 
@@ -118,48 +120,18 @@ class StudentModel
         }
         $str = substr($str, 0, -2);
 
+        echo $str.'<br>';
+
         if(isset($_POST['submit']))
         {
             //header('Location: ../student');
 
-            $sql = "INSERT INTO ".ucfirst($new->tablename)."
-                (".
-                $str
-                .
-                ")
-                              VALUES 
-                    (NULL, :1, :2, :3, :4, NULL)";
+            $sql = "INSERT INTO ".ucfirst($new->tablename)."(".$str.") VALUES 
+                    (NULL, ?, ?, ?, ?, ?)";
 
             $stmt = $db->prepare($sql);
 
-            print_r($stmt);
-            echo '<br>';
-            
-            $name = $_POST[1];
-            $sirname = $_POST[2];
-            $email = $_POST[3];
-            $telnumber = $_POST[4];
-
-            if ($email == NULL){
-                $email = '-';
-            }
-            if ($telnumber == NULL){
-                $telnumber = '-';
-            }
-
-
-            $stmt->bindValue(':1', $name);
-            $stmt->bindValue(':2', $sirname);
-            $stmt->bindValue(':3', $email);
-            $stmt->bindValue(':4', $telnumber);
-
-            echo $name.$sirname.$email.$telnumber;
-            echo '<br>';
-
-            echo $stmt->execute();
-            echo '<br>';
-
-
+            return $stmt->execute(array($_POST[1], $_POST[2], $_POST[3], $_POST[4], $_POST[5]));
         }
 
 
@@ -169,7 +141,7 @@ class StudentModel
     {
         $id = intval($id);
 
-        $delete = StudentModel::setTable('Student');
+        $delete = MainModel::setTable('Student');
 
         if($id){
             if(isset($_POST['submit'])) {
@@ -189,7 +161,7 @@ class StudentModel
 
     public static function setTable($tablename){
 
-        $tableobject = new StudentModel();
+        $tableobject = new MainModel();
 
         $tableobject->tablename = $tablename;
 
