@@ -7,6 +7,7 @@
  */
 
 require_once 'vendor/autoload.php';
+include 'views/mainIndex.html';
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
