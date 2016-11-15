@@ -11,22 +11,31 @@ class Router
 {
     private $routes;
 
+    /**
+     * Routes file connection constructor
+     */
     public function __construct()
     {
         $routesPath = ROOT.'/config/routes.php';
         $this->routes = include($routesPath);
     }
 
-    private function getURI()
+    /**
+     * Setting base URL address
+     */
+    private function getURL()
     {
         if (!empty($_SERVER['REQUEST_URI'])){
             return substr($_SERVER['REQUEST_URI'], strlen('/localhost/mysite/home4/'));
         }
     }
 
+    /**
+     * Router main workplace
+     */
     public function run()
     {
-        $uri = $this->getURI();
+        $uri = $this->getURL();
 
         foreach ($this->routes as $uriPattern => $path) {
 

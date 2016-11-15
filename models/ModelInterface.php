@@ -12,16 +12,27 @@ namespace Vendor\src\models;
 interface ModelInterface
 {
     /**
-     * @param var $id
+     * @param int $id
      *
      * @return object
      */
     public static function editItem($id);
 
+    /**
+     * @return object
+     */
     public static function getItemList();
 
+    /**
+     * @return mixed
+     */
     public static function addNewItem();
 
+    /**
+     * @param int $id
+     *
+     * @return mixed
+     */
     public static function deleteItem($id);
 
 }

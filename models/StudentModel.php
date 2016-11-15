@@ -13,6 +13,7 @@ use Vendor\src\connector\Connector;
 
 class StudentModel extends MainModel implements ModelInterface
 {
+
     public static function editItem($id)
     {
         $id = intval($id);
@@ -80,8 +81,6 @@ class StudentModel extends MainModel implements ModelInterface
         $db = Connector::getConnection();
 
         $new = self::setTable('Student');
-
-        $new->columns = self::getColumns($new->tablename);
 
         if(isset($_POST['submit']))
         {

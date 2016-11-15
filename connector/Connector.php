@@ -11,7 +11,9 @@ namespace Vendor\src\connector;
 
 class Connector
 {
-
+    /**
+     * Database connection with given parameters and encoding selection
+     */
     public static function getConnection()
     {
         $paramsPath = ROOT . '/config/ConnectorParams.php';
@@ -22,8 +24,6 @@ class Connector
         $db = new \PDO($dsn, $params['user'], $params['password']);
 
         $db->exec("set names utf8");
-
-
 
         return $db;
     }

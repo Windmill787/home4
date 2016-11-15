@@ -75,8 +75,6 @@ class UniversityModel extends MainModel implements ModelInterface
 
         $new = UniversityModel::setTable('University');
 
-        $new->columns = UniversityModel::getColumns($new->tablename);
-
         if(isset($_POST['submit']))
         {
             header('Location: ../university');

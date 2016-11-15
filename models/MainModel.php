@@ -13,10 +13,19 @@ use Vendor\src\connector\Connector;
 
 class MainModel
 {
+    /**
+     * @var string
+     * @var array
+     */
     public $tablename;
 
     public $dataArray = array();
 
+    /**
+     * @param string $tablename
+     *
+     * @return object
+     */
     public static function setTable($tablename){
 
         $tableobject = new self();
@@ -27,7 +36,13 @@ class MainModel
 
     }
 
-    public static function fetchData($id, $table)
+    /**
+     * @param int $id
+     * @param string $tablename
+     *
+     * @return object
+     */
+    public static function fetchData($id, $tablename)
     {
         $id = intval($id);
 
@@ -35,7 +50,7 @@ class MainModel
 
             $db = Connector::getConnection();
 
-            $fetch = self::setTable($table);
+            $fetch = self::setTable($tablename);
 
             $sql = $db->query("SELECT * FROM $fetch->tablename WHERE ".lcfirst($fetch->tablename)."_id=$id");
 

@@ -13,6 +13,7 @@ use Vendor\src\connector\Connector;
 
 class HomeworkModel extends MainModel implements ModelInterface
 {
+
     public static function editItem($id)
     {
         $id = intval($id);
@@ -29,7 +30,7 @@ class HomeworkModel extends MainModel implements ModelInterface
 
                 $sql = "UPDATE Homework SET homework_name = :homework_name, 
                                         homework_done = :homework_done,
-                                        discipline_id = :discipline_id,
+                                        discipline_id = :discipline_id
                                         WHERE homework_id = $id";
 
                 $stmt = $db->prepare($sql);
@@ -74,8 +75,6 @@ class HomeworkModel extends MainModel implements ModelInterface
         $db = Connector::getConnection();
 
         $new = self::setTable('Homework');
-
-        $new->columns = self::getColumns($new->tablename);
 
         if(isset($_POST['submit']))
         {

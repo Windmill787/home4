@@ -13,6 +13,7 @@ use Vendor\src\connector\Connector;
 
 class DepartmentModel extends MainModel implements ModelInterface
 {
+
     public static function editItem($id)
     {
         $id = intval($id);
@@ -45,7 +46,6 @@ class DepartmentModel extends MainModel implements ModelInterface
         }
 
     }
-
 
 
     public static function getItemList()
