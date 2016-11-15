@@ -15,7 +15,7 @@ class UniversityController
     {
         $List = UniversityModel::getItemList();
 
-        require_once (ROOT.'/views/indexun.html');
+        require_once (ROOT.'/views/universityIndex.html');
 
         return true;
     }
@@ -28,7 +28,7 @@ class UniversityController
 
             $editItem = UniversityModel::editItem($id);
 
-            require_once (ROOT.'/views/editun.html');
+            require_once (ROOT.'/views/universityEdit.html');
 
         }
         return true;
@@ -38,7 +38,7 @@ class UniversityController
     {
         $addItem = UniversityModel::addNewItem();
 
-        require_once (ROOT.'/views/addun.html');
+        require_once (ROOT.'/views/universityAdd.html');
 
         return true;
     }
@@ -51,7 +51,7 @@ class UniversityController
 
             $deleteItem = UniversityModel::deleteItem($id);
 
-            require_once (ROOT.'/views/deleteun.html');
+            require_once (ROOT.'/views/universityDelete.html');
 
         }
         return true;

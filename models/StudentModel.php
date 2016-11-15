@@ -11,7 +11,7 @@ namespace Vendor\src\models;
 
 use Vendor\src\connector\Connector;
 
-class StudentModel extends MainModel
+class StudentModel extends MainModel implements ModelInterface
 {
     public static function editItem($id)
     {
@@ -30,7 +30,8 @@ class StudentModel extends MainModel
                 $sql = "UPDATE Student SET student_name = :student_name, 
                                         student_sirname = :student_sirname, 
                                         student_email = :student_email, 
-                                        student_telnumber = :student_telnumber 
+                                        student_telnumber = :student_telnumber,
+                                        department_id = :department_id
                                         WHERE student_id = $id";
 
                 $stmt = $db->prepare($sql);
@@ -39,18 +40,13 @@ class StudentModel extends MainModel
                 $sirname = $_POST['student_sirname'];
                 $email = $_POST['student_email'];
                 $telnumber = $_POST['student_telnumber'];
-
-                if ($email == NULL){
-                    $email = '-';
-                }
-                if ($telnumber == NULL){
-                    $telnumber = '-';
-                }
+                $dep_id = $_POST['department_id'];
 
                 $stmt->bindValue(':student_name', $name);
                 $stmt->bindValue(':student_sirname', $sirname);
                 $stmt->bindValue(':student_email', $email);
                 $stmt->bindValue(':student_telnumber', $telnumber);
+                $stmt->bindValue(':department_id', $dep_id);
 
                 return $stmt->execute();
 
@@ -91,17 +87,21 @@ class StudentModel extends MainModel
         {
             header('Location: ../student');
 
-            $sql = "INSERT INTO ".$new->tablename."(".$new->columns.") VALUES 
-                    (NULL, :1, :2, :3, :4, :5)";
+            $sql = "INSERT INTO ".$new->tablename."(student_name, student_sirname,
+            student_email, student_telnumber, department_id) VALUES 
+                    (
+                    :student_name, :student_sirname, :student_email, 
+                    :student_telnumber, :department_id
+                    )";
 
             $stmt = $db->prepare($sql);
 
             $execute = $stmt->execute(array(
-                ':1' => $_POST[1],
-                ':2' => $_POST[2],
-                ':3' => $_POST[3],
-                ':4' => $_POST[4],
-                ':5' => $_POST[5]
+                ':student_name' => $_POST['student_name'],
+                ':student_sirname' => $_POST['student_sirname'],
+                ':student_email' => $_POST['student_email'],
+                ':student_telnumber' => $_POST['student_telnumber'],
+                ':department_id' => $_POST['department_id']
             ));
             return $execute;
         }

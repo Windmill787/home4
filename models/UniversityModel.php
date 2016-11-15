@@ -11,7 +11,7 @@ namespace Vendor\src\models;
 
 use Vendor\src\connector\Connector;
 
-class UniversityModel extends MainModel
+class UniversityModel extends MainModel implements ModelInterface
 {
     public static function editItem($id)
     {
@@ -81,8 +81,8 @@ class UniversityModel extends MainModel
         {
             header('Location: ../university');
 
-            $sql = "INSERT INTO ".$new->tablename."(".$new->columns.") VALUES 
-                    (NULL, :1, :2, :3)";
+            $sql = "INSERT INTO ".$new->tablename."(university_name, university_city,
+            university_site) VALUES (:1, :2, :3)";
 
             $stmt = $db->prepare($sql);
 

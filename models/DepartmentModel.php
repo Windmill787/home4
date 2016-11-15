@@ -11,7 +11,7 @@ namespace Vendor\src\models;
 
 use Vendor\src\connector\Connector;
 
-class DepartmentModel extends MainModel
+class DepartmentModel extends MainModel implements ModelInterface
 {
     public static function editItem($id)
     {
@@ -74,20 +74,18 @@ class DepartmentModel extends MainModel
 
         $new = self::setTable('Department');
 
-        $new->columns = self::getColumns($new->tablename);
-
         if(isset($_POST['submit']))
         {
             header('Location: ../department');
 
-            $sql = "INSERT INTO ".$new->tablename."(".$new->columns.") VALUES 
-                    (NULL, :1, :2)";
+            $sql = "INSERT INTO ".$new->tablename."(department_name, university_id) VALUES 
+                    (:department_name, :university_id)";
 
             $stmt = $db->prepare($sql);
 
             $execute = $stmt->execute(array(
-                ':1' => $_POST[1],
-                ':2' => $_POST[2]
+                ':department_name' => $_POST['department_name'],
+                ':university_id' => $_POST['university_id']
             ));
             return $execute;
         }

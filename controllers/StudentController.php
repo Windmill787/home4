@@ -15,7 +15,7 @@ class StudentController
     {
         $List = StudentModel::getItemList();
 
-        require_once (ROOT.'/views/index.html');
+        require_once (ROOT.'/views/studentIndex.html');
 
         return true;
     }
@@ -28,7 +28,7 @@ class StudentController
 
             $editItem = StudentModel::editItem($id);
 
-            require_once (ROOT.'/views/edit.html');
+            require_once (ROOT.'/views/studentEdit.html');
 
         }
         return true;
@@ -38,7 +38,7 @@ class StudentController
     {
         $addItem = StudentModel::addNewItem();
 
-        require_once (ROOT.'/views/add.html');
+        require_once (ROOT.'/views/studentAdd.html');
 
         return true;
     }
@@ -51,7 +51,7 @@ class StudentController
 
             $deleteItem = StudentModel::deleteItem($id);
 
-            require_once (ROOT.'/views/delete.html');
+            require_once (ROOT.'/views/studentDelete.html');
 
         }
         return true;

@@ -17,8 +17,6 @@ class MainModel
 
     public $dataArray = array();
 
-    public $columns;
-
     public static function setTable($tablename){
 
         $tableobject = new self();
@@ -27,26 +25,6 @@ class MainModel
 
         return $tableobject;
 
-    }
-
-    public static function getColumns($tablename){
-
-        $db = Connector::getConnection();
-
-        $columns = $db->query("SHOW COLUMNS FROM $tablename");
-
-        $columns = $columns->fetchAll(\PDO::FETCH_NUM);
-
-        $obj = new self();
-
-        foreach ($columns as $item)
-        {
-            $obj->columns .= $item[0].', ';
-
-        }
-        $obj->columns = substr($obj->columns, 0, -2);
-
-        return $obj->columns;
     }
 
     public static function fetchData($id, $table)

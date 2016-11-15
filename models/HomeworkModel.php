@@ -11,7 +11,7 @@ namespace Vendor\src\models;
 
 use Vendor\src\connector\Connector;
 
-class HomeworkModel extends MainModel
+class HomeworkModel extends MainModel implements ModelInterface
 {
     public static function editItem($id)
     {
@@ -81,15 +81,15 @@ class HomeworkModel extends MainModel
         {
             header('Location: ../homework');
 
-            $sql = "INSERT INTO ".$new->tablename."(".$new->columns.") VALUES 
-                    (NULL, :1, :2, :3)";
+            $sql = "INSERT INTO ".$new->tablename."(homework_name, homework_done, discipline_id) VALUES 
+                    (:homework_name, :homework_done, :discipline_id)";
 
             $stmt = $db->prepare($sql);
 
             $execute = $stmt->execute(array(
-                ':1' => $_POST[1],
-                ':2' => $_POST[2],
-                ':3' => $_POST[3],
+                ':homework_name' => $_POST['homework_name'],
+                ':homework_done' => $_POST['homework_done'],
+                ':discipline_id' => $_POST['discipline_id'],
             ));
             return $execute;
         }
