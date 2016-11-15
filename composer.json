@@ -1,19 +1,17 @@
 {
     "name": "max/home4",
-    "description": "homework№4",
     "authors": [
         {
             "name": "Max Stoliarov",
             "email": "Windmill_78@mail.ru"
         }
     ],
-    "minimum-stability": "stable",
     "require": {
 
     },
     "autoload":{
         "psr-4": {
-            "Vendor\\Dir\\": "Classes"
+            "Vendor\\src\\": ""
         }
     }
 }

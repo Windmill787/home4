@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+
+  <title>Редактирование</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a href="../../student">На главную</a>
+
+
+    <h3 align="center">Изменение данных</h3>
+
+<form name="form" method="post">
+
+    <input type="text" name="student_name" placeholder="Имя"
+           value="<?php echo $fetchItem->dataArray[1] ?>" required/><br><br>
+
+    <input type="text" name="student_sirname" placeholder="Фамилия"
+           value="<?php echo $fetchItem->dataArray[2] ?>" required/><br><br>
+
+    <input type="text" name="student_email" placeholder="Электронная почта"
+           value="<?php echo $fetchItem->dataArray[3] ?>"/><br><br>
+
+    <input type="text" name="student_telnumber" placeholder="Номер телефона"
+           value="<?php echo $fetchItem->dataArray[4] ?>"/><br><br>
+
+    <input type="text" name="department_id" placeholder="ID кафедры"
+           value="<?php echo $fetchItem->dataArray[5] ?>"/><br><br>
+
+
+    <input type="submit" class="submit" name="submit" value="Сохранить">
+
+</form>
+
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<table border="1px solid black">
+
+  <th><a href="./university/add">Добавить запись</a></th>
+  <tr>
+    <?php foreach ($List->dataArray as $item) : ?>
+
+    <?php foreach ($item as $item2) : ?>
+
+      <td><?php echo $item2; ?></td>
+
+
+
+    <?php endforeach; ?>
+    <td><a href="./university/edit/<?php echo $item[0]; ?>">Изменить</a></td>
+
+    <td><a href="./university/delete/<?php echo $item[0]; ?>">Удалить</a></td>
+
+  </tr>
+
+  <?php endforeach; ?>
+
+
+
+</table>
+
+</body>
+</html>

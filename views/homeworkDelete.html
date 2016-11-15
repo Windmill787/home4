@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<a href="../../homework">На главную</a>
+<h3 align="center">Вы уверенны что хотите удалить домашнее задание номер <?php echo $id; ?>?</h3>
+<input type="text" value="<?php echo $fetchItem->dataArray[1] ?>" readonly required/><br><br>
+
+<input type="text" value="<?php echo $fetchItem->dataArray[2] ?>" readonly required/><br><br>
+
+<input type="text" value="<?php echo $fetchItem->dataArray[3] ?>" readonly required/><br><br>
+
+<form name="form" method="post">
+  <input type="submit" class="submit" name="submit" value="Удалить" />
+</form>
+</body>
+</html>
