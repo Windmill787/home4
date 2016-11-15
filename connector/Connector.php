@@ -7,6 +7,7 @@
  * Time: 17:37
  */
 
+namespace Vendor\src\connector;
 
 class Connector
 {
@@ -18,7 +19,7 @@ class Connector
 
         $dsn = "mysql:host={$params['host']};dbname={$params['dbname']}";
 
-        $db = new PDO($dsn, $params['user'], $params['password']);
+        $db = new \PDO($dsn, $params['user'], $params['password']);
 
         $db->exec("set names utf8");
 

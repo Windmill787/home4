@@ -6,7 +6,12 @@
  * Date: 15.11.16
  * Time: 18:11
  */
-class UniversityModel extends \Vendor\src\parameters\ModelParameters
+
+namespace Vendor\src\models;
+
+use Vendor\src\connector\Connector;
+
+class UniversityModel extends MainModel
 {
     public static function editItem($id)
     {
@@ -40,26 +45,6 @@ class UniversityModel extends \Vendor\src\parameters\ModelParameters
                 return $stmt->execute();
 
             }
-        }
-
-    }
-
-    public static function fetchData($id)
-    {
-        $id = intval($id);
-
-        if($id) {
-
-            $db = Connector::getConnection();
-
-            $fetch = UniversityModel::setTable('University');
-
-            $sql = $db->query("SELECT * FROM $fetch->tablename WHERE ".lcfirst($fetch->tablename)."_id=$id");
-
-            $fetch->dataArray = $sql->fetch(\PDO::FETCH_NUM);
-
-            return $fetch;
-
         }
 
     }
@@ -131,35 +116,4 @@ class UniversityModel extends \Vendor\src\parameters\ModelParameters
         }
 
     }
-
-    public static function setTable($tablename){
-
-        $tableobject = new UniversityModel();
-
-        $tableobject->tablename = $tablename;
-
-        return $tableobject;
-
-    }
-
-    public static function getColumns($tablename){
-
-        $db = Connector::getConnection();
-
-        $columns = $db->query("SHOW COLUMNS FROM $tablename");
-
-        $columns = $columns->fetchAll(\PDO::FETCH_NUM);
-
-        $obj = new UniversityModel();
-
-        foreach ($columns as $item)
-        {
-            $obj->columns .= $item[0].', ';
-
-        }
-        $obj->columns = substr($obj->columns, 0, -2);
-
-        return $obj->columns;
-    }
-
 }

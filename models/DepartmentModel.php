@@ -6,7 +6,12 @@
  * Date: 15.11.16
  * Time: 18:57
  */
-class DepartmentModel extends \Vendor\src\parameters\ModelParameters
+
+namespace Vendor\src\models;
+
+use Vendor\src\connector\Connector;
+
+class DepartmentModel extends MainModel
 {
     public static function editItem($id)
     {
@@ -14,7 +19,7 @@ class DepartmentModel extends \Vendor\src\parameters\ModelParameters
 
         if($id){
 
-            $edit = DepartmentModel::setTable('Department');
+            $edit = self::setTable('Department');
 
             if (isset($_POST['submit'])) {
 
@@ -41,31 +46,13 @@ class DepartmentModel extends \Vendor\src\parameters\ModelParameters
 
     }
 
-    public static function fetchData($id)
-    {
-        $id = intval($id);
 
-        if($id) {
-
-            $db = Connector::getConnection();
-
-            $fetch = DepartmentModel::setTable('Department');
-
-            $sql = $db->query("SELECT * FROM $fetch->tablename WHERE ".lcfirst($fetch->tablename)."_id=$id");
-
-            $fetch->dataArray = $sql->fetch(\PDO::FETCH_NUM);
-
-            return $fetch;
-
-        }
-
-    }
 
     public static function getItemList()
     {
         $db = Connector::getConnection();
 
-        $obj1 = DepartmentModel::setTable('Department');
+        $obj1 = self::setTable('Department');
 
         $result = $db->query("SELECT * FROM $obj1->tablename");
 
@@ -85,9 +72,9 @@ class DepartmentModel extends \Vendor\src\parameters\ModelParameters
     {
         $db = Connector::getConnection();
 
-        $new = DepartmentModel::setTable('Department');
+        $new = self::setTable('Department');
 
-        $new->columns = DepartmentModel::getColumns($new->tablename);
+        $new->columns = self::getColumns($new->tablename);
 
         if(isset($_POST['submit']))
         {
@@ -110,7 +97,7 @@ class DepartmentModel extends \Vendor\src\parameters\ModelParameters
     {
         $id = intval($id);
 
-        $delete = DepartmentModel::setTable('Department');
+        $delete = self::setTable('Department');
 
         if($id){
             if(isset($_POST['submit'])) {
@@ -128,34 +115,6 @@ class DepartmentModel extends \Vendor\src\parameters\ModelParameters
 
     }
 
-    public static function setTable($tablename){
 
-        $tableobject = new DepartmentModel();
-
-        $tableobject->tablename = $tablename;
-
-        return $tableobject;
-
-    }
-
-    public static function getColumns($tablename){
-
-        $db = Connector::getConnection();
-
-        $columns = $db->query("SHOW COLUMNS FROM $tablename");
-
-        $columns = $columns->fetchAll(\PDO::FETCH_NUM);
-
-        $obj = new DepartmentModel();
-
-        foreach ($columns as $item)
-        {
-            $obj->columns .= $item[0].', ';
-
-        }
-        $obj->columns = substr($obj->columns, 0, -2);
-
-        return $obj->columns;
-    }
 
 }

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<a href="../../homework">На главную</a>
+
+
+<h3 align="center">Изменение данных</h3>
+
+<form name="form" method="post">
+
+  <input type="text" name="homework_name" placeholder="Имя"
+         value="<?php echo $fetchItem->dataArray[1] ?>" required/><br><br>
+
+  <input type="text" name="homework_done" placeholder="Фамилия"
+         value="<?php echo $fetchItem->dataArray[2] ?>" required/><br><br>
+
+  <input type="text" name="discipline_id" placeholder="Фамилия"
+         value="<?php echo $fetchItem->dataArray[3] ?>" required/><br><br>
+
+  <input type="submit" class="submit" name="submit" value="Сохранить">
+
+</form>
+</body>
+</html>

@@ -7,7 +7,7 @@
  * Time: 18:11
  */
 
-include "models/UniversityModel.php";
+use Vendor\src\models\UniversityModel;
 
 class UniversityController
 {
@@ -24,7 +24,7 @@ class UniversityController
     {
         if ($id){
 
-            $fetchItem = UniversityModel::fetchData($id);
+            $fetchItem = UniversityModel::fetchData($id, 'University');
 
             $editItem = UniversityModel::editItem($id);
 
@@ -47,7 +47,7 @@ class UniversityController
     {
         if ($id){
 
-            $fetchItem = UniversityModel::fetchData($id);
+            $fetchItem = UniversityModel::fetchData($id, 'University');
 
             $deleteItem = UniversityModel::deleteItem($id);
 

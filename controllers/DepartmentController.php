@@ -7,7 +7,7 @@
  * Time: 18:51
  */
 
-include "models/DepartmentModel.php";
+use Vendor\src\models\DepartmentModel;
 
 class DepartmentController
 {
@@ -24,7 +24,7 @@ class DepartmentController
     {
         if ($id){
 
-            $fetchItem = DepartmentModel::fetchData($id);
+            $fetchItem = DepartmentModel::fetchData($id, 'Department');
 
             $editItem = DepartmentModel::editItem($id);
 
@@ -47,7 +47,7 @@ class DepartmentController
     {
         if ($id){
 
-            $fetchItem = DepartmentModel::fetchData($id);
+            $fetchItem = DepartmentModel::fetchData($id, 'Department');
 
             $deleteItem = DepartmentModel::deleteItem($id);
 

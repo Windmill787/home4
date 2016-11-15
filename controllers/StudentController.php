@@ -7,7 +7,7 @@
  * Time: 18:00
  */
 
-include "models/StudentModel.php";
+use Vendor\src\models\StudentModel;
 
 class StudentController
 {
@@ -24,7 +24,7 @@ class StudentController
     {
         if ($id){
 
-            $fetchItem = StudentModel::fetchData($id);
+            $fetchItem = StudentModel::fetchData($id, 'Student');
 
             $editItem = StudentModel::editItem($id);
 
@@ -47,7 +47,7 @@ class StudentController
     {
         if ($id){
 
-            $fetchItem = StudentModel::fetchData($id);
+            $fetchItem = StudentModel::fetchData($id, 'Student');
 
             $deleteItem = StudentModel::deleteItem($id);
 
