@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<style>
+
+  table{
+    border-collapse:collapse;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  th{
+    text-align: center;
+  }
+  td, th{
+    padding:10px;
+    font-size: 18px;
+  }
+  a{
+    text-decoration: none;
+    color: darkslategrey;
+    display: block;
+    padding: 10px;
+  }
+  a:hover{
+    background-color: lightsalmon;
+  }
+  /*.sub{
+      width: 150px;
+      height: 30px;
+      border: 2px solid black;
+      background-color: white;
+      position: absolute;
+      top: 45px;
+  }
+
+  .sub:hover{
+      background-color: lightsalmon;
+      border-color: black;
+  }*/
+</style>
+<table border="1px solid black">
+
+
+  <form method="post">
+    <input type="text" name="tablename" />
+    <input class="sub" type="submit" name="submit" value="Отправить" />
+  </form>
+
+
+  <th><a href="./university/add">Добавить запись</a></th>
+  <tr>
+    <?php foreach ($List->dataArray as $item) : ?>
+
+    <?php foreach ($item as $item2) : ?>
+
+      <td><?php echo $item2; ?></td>
+
+
+
+    <?php endforeach; ?>
+    <td><a href="./university/edit/<?php echo $item[0]; ?>">Изменить</a></td>
+
+    <td><a href="./university/delete/<?php echo $item[0]; ?>">Удалить</a></td>
+
+  </tr>
+
+  <?php endforeach; ?>
+
+
+
+</table>
+
+</body>
+</html>

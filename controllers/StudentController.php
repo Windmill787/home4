@@ -1,18 +1,19 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: max
- * Date: 07.11.16
- * Time: 2:01
+ * Date: 15.11.16
+ * Time: 18:00
  */
 
-include ROOT.'/models/MainModel.php';
+include "models/StudentModel.php";
 
-class MainController
+class StudentController
 {
     public function actionIndex()
     {
-        $List = MainModel::getItemList();
+        $List = StudentModel::getItemList();
 
         require_once (ROOT.'/views/index.html');
 
@@ -23,9 +24,9 @@ class MainController
     {
         if ($id){
 
-            $fetchItem = MainModel::fetchData($id);
+            $fetchItem = StudentModel::fetchData($id);
 
-            $editItem = MainModel::editItem($id);
+            $editItem = StudentModel::editItem($id);
 
             require_once (ROOT.'/views/edit.html');
 
@@ -35,7 +36,7 @@ class MainController
 
     public function actionAdd()
     {
-        $addItem = MainModel::addNewItem();
+        $addItem = StudentModel::addNewItem();
 
         require_once (ROOT.'/views/add.html');
 
@@ -46,9 +47,9 @@ class MainController
     {
         if ($id){
 
-            $fetchItem = MainModel::fetchData($id);
+            $fetchItem = StudentModel::fetchData($id);
 
-            $deleteItem = MainModel::deleteItem($id);
+            $deleteItem = StudentModel::deleteItem($id);
 
             require_once (ROOT.'/views/delete.html');
 

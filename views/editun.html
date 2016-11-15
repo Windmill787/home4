@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<a href="../../university">На главную</a>
+
+
+<h3 align="center">Изменение данных</h3>
+
+<form name="form" method="post">
+
+  <input type="text" name="university_name" placeholder="Имя"
+         value="<?php echo $fetchItem->dataArray[1] ?>" required/><br><br>
+
+  <input type="text" name="university_city" placeholder="Фамилия"
+         value="<?php echo $fetchItem->dataArray[2] ?>" required/><br><br>
+
+  <input type="text" name="university_site" placeholder="Электронная почта"
+         value="<?php echo $fetchItem->dataArray[3] ?>" required/><br><br>
+
+
+  <input type="submit" class="submit" name="submit" value="Сохранить">
+
+</form>
+
+</body>
+</html>

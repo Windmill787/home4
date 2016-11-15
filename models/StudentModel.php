@@ -3,11 +3,10 @@
 /**
  * Created by PhpStorm.
  * User: max
- * Date: 07.11.16
- * Time: 15:25
+ * Date: 15.11.16
+ * Time: 18:00
  */
-
-class MainModel extends \Vendor\src\parameters\ModelParameters
+class StudentModel extends \Vendor\src\parameters\ModelParameters
 {
     public static function editItem($id)
     {
@@ -15,11 +14,11 @@ class MainModel extends \Vendor\src\parameters\ModelParameters
 
         if($id){
 
-            $edit = MainModel::setTable('Student');
+            $edit = StudentModel::setTable('Student');
 
             if (isset($_POST['submit'])) {
 
-                header('Location: ../../main');
+                header('Location: ../../student');
 
                 $db = Connector::getConnection();
 
@@ -63,11 +62,11 @@ class MainModel extends \Vendor\src\parameters\ModelParameters
 
             $db = Connector::getConnection();
 
-            $fetch = MainModel::setTable('Student');
+            $fetch = StudentModel::setTable('Student');
 
             $sql = $db->query("SELECT * FROM $fetch->tablename WHERE ".lcfirst($fetch->tablename)."_id=$id");
 
-            $fetch->dataArray = $sql->fetch(PDO::FETCH_NUM);
+            $fetch->dataArray = $sql->fetch(\PDO::FETCH_NUM);
 
             return $fetch;
 
@@ -77,21 +76,21 @@ class MainModel extends \Vendor\src\parameters\ModelParameters
 
     public static function getItemList()
     {
-            $db = Connector::getConnection();
+        $db = Connector::getConnection();
 
-            $obj1 = MainModel::setTable('Student');
+        $obj1 = StudentModel::setTable('Student');
 
-            $result = $db->query("SELECT * FROM $obj1->tablename");
+        $result = $db->query("SELECT * FROM $obj1->tablename");
 
-            $i = 0;
+        $i = 0;
 
-            $obj1->tablename = lcfirst($obj1->tablename);
+        $obj1->tablename = lcfirst($obj1->tablename);
 
-            while ($row = $result->fetch(PDO::FETCH_NUM)) {
-                $obj1->dataArray[$i] = $row;
-                $i++;
-            }
-            return $obj1;
+        while ($row = $result->fetch(\PDO::FETCH_NUM)) {
+            $obj1->dataArray[$i] = $row;
+            $i++;
+        }
+        return $obj1;
 
     }
 
@@ -99,13 +98,13 @@ class MainModel extends \Vendor\src\parameters\ModelParameters
     {
         $db = Connector::getConnection();
 
-        $new = MainModel::setTable('Student');
+        $new = StudentModel::setTable('Student');
 
-        $new->columns = MainModel::getColumns($new->tablename);
+        $new->columns = StudentModel::getColumns($new->tablename);
 
         if(isset($_POST['submit']))
         {
-            header('Location: ../main');
+            header('Location: ../student');
 
             $sql = "INSERT INTO ".$new->tablename."(".$new->columns.") VALUES 
                     (NULL, :1, :2, :3, :4, :5)";
@@ -118,7 +117,7 @@ class MainModel extends \Vendor\src\parameters\ModelParameters
                 ':3' => $_POST[3],
                 ':4' => $_POST[4],
                 ':5' => $_POST[5]
-                ));
+            ));
             return $execute;
         }
     }
@@ -127,11 +126,11 @@ class MainModel extends \Vendor\src\parameters\ModelParameters
     {
         $id = intval($id);
 
-        $delete = MainModel::setTable('Student');
+        $delete = StudentModel::setTable('Student');
 
         if($id){
             if(isset($_POST['submit'])) {
-                header('Location: ../../main');
+                header('Location: ../../student');
 
                 $db = Connector::getConnection();
 
@@ -147,7 +146,7 @@ class MainModel extends \Vendor\src\parameters\ModelParameters
 
     public static function setTable($tablename){
 
-        $tableobject = new MainModel();
+        $tableobject = new StudentModel();
 
         $tableobject->tablename = $tablename;
 
@@ -161,9 +160,9 @@ class MainModel extends \Vendor\src\parameters\ModelParameters
 
         $columns = $db->query("SHOW COLUMNS FROM $tablename");
 
-        $columns = $columns->fetchAll(PDO::FETCH_NUM);
+        $columns = $columns->fetchAll(\PDO::FETCH_NUM);
 
-        $obj = new MainModel();
+        $obj = new StudentModel();
 
         foreach ($columns as $item)
         {
@@ -174,4 +173,5 @@ class MainModel extends \Vendor\src\parameters\ModelParameters
 
         return $obj->columns;
     }
+
 }
